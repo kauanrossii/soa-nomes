@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Tendência de Nomes no Brasil</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Análise de Tendência de Nomes no Brasil</h1>
+            <p>Baseado nos dados do Censo IBGE</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="ranking-evolution">Evolução do Ranking</button>
+            <button class="tab-btn" data-tab="location-ranking">Ranking por Localidade</button>
+            <button class="tab-btn" data-tab="names-comparison">Comparação de Nomes</button>
+        </div>
+
+        <div class="tab-content active" id="ranking-evolution">
+            <h2>Evolução do Ranking de um Nome</h2>
+            <div class="form-container">
+                <form id="ranking-evolution-form">
+                    <div class="form-group">
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" name="name" required placeholder="Ex: Maria">
+                    </div>
+                    <div class="form-group">
+                        <label for="start-decade">Década Inicial:</label>
+                        <select id="start-decade" name="startDecade" required>
+                            <option value="1930">1930</option>
+                            <option value="1940">1940</option>
+                            <option value="1950">1950</option>
+                            <option value="1960">1960</option>
+                            <option value="1970">1970</option>
+                            <option value="1980">1980</option>
+                            <option value="1990">1990</option>
+                            <option value="2000">2000</option>
+                            <option value="2010">2010</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-decade">Década Final:</label>
+                        <select id="end-decade" name="endDecade" required>
+                            <option value="1930">1930</option>
+                            <option value="1940">1940</option>
+                            <option value="1950">1950</option>
+                            <option value="1960">1960</option>
+                            <option value="1970">1970</option>
+                            <option value="1980">1980</option>
+                            <option value="1990">1990</option>
+                            <option value="2000">2000</option>
+                            <option value="2010" selected>2010</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Consultar</button>
+                </form>
+            </div>
+            <div class="result-container">
+                <div id="ranking-evolution-chart" class="chart-container"></div>
+                <div id="ranking-evolution-loading" class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando dados...</p>
+                </div>
+                <div id="ranking-evolution-error" class="error-container">
+                    <p>Ocorreu um erro ao carregar os dados. Por favor, tente novamente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="location-ranking">
+            <h2>Ranking de Nomes em uma Localidade</h2>
+            <div class="form-container">
+                <form id="location-ranking-form">
+                    <div class="form-group">
+                        <label for="location">Localidade:</label>
+                        <select id="location" name="location" required>
+                            <option value="BR">Brasil</option>
+                            <option value="12">Acre</option>
+                            <option value="27">Alagoas</option>
+                            <option value="16">Amapá</option>
+                            <option value="13">Amazonas</option>
+                            <option value="29">Bahia</option>
+                            <option value="23">Ceará</option>
+                            <option value="53">Distrito Federal</option>
+                            <option value="32">Espírito Santo</option>
+                            <option value="52">Goiás</option>
+                            <option value="21">Maranhão</option>
+                            <option value="51">Mato Grosso</option>
+                            <option value="50">Mato Grosso do Sul</option>
+                            <option value="31">Minas Gerais</option>
+                            <option value="15">Pará</option>
+                            <option value="25">Paraíba</option>
+                            <option value="41">Paraná</option>
+                            <option value="26">Pernambuco</option>
+                            <option value="22">Piauí</option>
+                            <option value="33">Rio de Janeiro</option>
+                            <option value="24">Rio Grande do Norte</option>
+                            <option value="43">Rio Grande do Sul</option>
+                            <option value="11">Rondônia</option>
+                            <option value="14">Roraima</option>
+                            <option value="42">Santa Catarina</option>
+                            <option value="35">São Paulo</option>
+                            <option value="28">Sergipe</option>
+                            <option value="17">Tocantins</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Consultar</button>
+                </form>
+            </div>
+            <div class="result-container">
+                <div id="location-ranking-table" class="table-container"></div>
+                <div id="location-ranking-loading" class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando dados...</p>
+                </div>
+                <div id="location-ranking-error" class="error-container">
+                    <p>Ocorreu um erro ao carregar os dados. Por favor, tente novamente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="names-comparison">
+            <h2>Comparação de Dois Nomes ao Longo do Tempo</h2>
+            <div class="form-container">
+                <form id="names-comparison-form">
+                    <div class="form-group">
+                        <label for="name1">Primeiro Nome:</label>
+                        <input type="text" id="name1" name="name1" required placeholder="Ex: João">
+                    </div>
+                    <div class="form-group">
+                        <label for="name2">Segundo Nome:</label>
+                        <input type="text" id="name2" name="name2" required placeholder="Ex: Maria">
+                    </div>
+                    <button type="submit" class="btn">Comparar</button>
+                </form>
+            </div>
+            <div class="result-container">
+                <div id="names-comparison-chart" class="chart-container"></div>
+                <div id="names-comparison-loading" class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando dados...</p>
+                </div>
+                <div id="names-comparison-error" class="error-container">
+                    <p>Ocorreu um erro ao carregar os dados. Por favor, tente novamente.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Desenvolvido como atividade prática de Sistemas Orientados a Serviços (SOA)</p>
+            <p>Dados fornecidos pela <a href="https://servicodados.ibge.gov.br/api/docs/nomes?versao=2" target="_blank">API de Nomes do IBGE</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>
